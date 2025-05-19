@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import FinancialOverview from '../../../components/FinancialOverview';
 import CalendarTracker from '../../../components/CalendarTracker';
 import { mockData } from '../../../lib/mockData';
 

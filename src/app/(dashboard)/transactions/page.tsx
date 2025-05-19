@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import FinancialOverview from '../../../components/FinancialOverview';
 import TransactionsTable from '../../../components/TransactionsTable';
 import { mockData } from '../../../lib/mockData';
 

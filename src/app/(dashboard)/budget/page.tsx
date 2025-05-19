@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import FinancialOverview from '../../../components/FinancialOverview';
 import CategorySpendingChart from '../../../components/CategorySpendingChart';
 import BudgetingAssistant from '../../../components/BudgetingAssistant';
 import { mockData } from '../../../lib/mockData';
