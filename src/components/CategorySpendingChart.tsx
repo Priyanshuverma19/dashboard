@@ -2,17 +2,20 @@
 
 import { useState } from 'react';
 import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  ChartEvent,
+  ActiveElement,
+} from 'chart.js';
+import { CategorySpending } from '../lib/mockData'; // Import the CategorySpending type
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface CategorySpendingChartProps {
-  data: {
-    labels: string[];
-    data: number[];
-    subcategories: Record<string, Record<string, number>>;
-    backgroundColor: string[];
-  };
+  data: CategorySpending; // Use the exported CategorySpending type
 }
 
 export default function CategorySpendingChart({ data }: CategorySpendingChartProps) {
@@ -24,17 +27,21 @@ export default function CategorySpendingChart({ data }: CategorySpendingChartPro
       {
         data: data.data,
         backgroundColor: data.backgroundColor,
+        borderColor: data.backgroundColor.map((color) => color.replace('0.6', '1')), // Add border colors
+        borderWidth: 1,
       },
     ],
   };
 
-  const subChartData = selectedCategory
+  const subChartData = selectedCategory && data.subcategories[selectedCategory]
     ? {
         labels: Object.keys(data.subcategories[selectedCategory]),
         datasets: [
           {
             data: Object.values(data.subcategories[selectedCategory]),
             backgroundColor: data.backgroundColor,
+            borderColor: data.backgroundColor.map((color) => color.replace('0.6', '1')),
+            borderWidth: 1,
           },
         ],
       }
@@ -44,8 +51,13 @@ export default function CategorySpendingChart({ data }: CategorySpendingChartPro
     responsive: true,
     plugins: {
       legend: { position: 'right' as const, labels: { color: 'var(--foreground)' } },
+      tooltip: {
+        backgroundColor: 'var(--card-bg)',
+        titleColor: 'var(--foreground)',
+        bodyColor: 'var(--foreground)',
+      },
     },
-    onClick: (_: any, elements: any[]) => {
+    onClick: (_event: ChartEvent, elements: ActiveElement[]) => {
       if (elements.length > 0) {
         const index = elements[0].index;
         const category = data.labels[index];
