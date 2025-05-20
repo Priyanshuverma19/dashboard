@@ -1,17 +1,17 @@
-// Define types for each part of the mockData structure
-interface User {
+// Define and export types for each part of the mockData structure
+export interface User {
   name: string;
   avatar: string;
 }
 
-interface Financials {
+export interface Financials {
   totalBalance: number;
   monthlyIncome: number;
   monthlyExpenses: number;
   savingsRatio: number;
 }
 
-interface Transaction {
+export interface Transaction {
   date: string;
   description: string;
   type: 'Credit' | 'Debit';
@@ -19,43 +19,43 @@ interface Transaction {
   amount: number;
 }
 
-interface ExpenseVsIncome {
+export interface ExpenseVsIncome {
   labels: string[];
   income: number[];
   expenses: number[];
 }
 
-interface CategorySpending {
+export interface CategorySpending {
   labels: string[];
   data: number[];
   subcategories: Record<string, Record<string, number>>;
   backgroundColor: string[];
 }
 
-interface DailySpendingTransaction {
+export interface DailySpendingTransaction {
   description: string;
   amount: number;
   category: string;
 }
 
-interface DailySpending {
+export interface DailySpending {
   date: string;
   amount: number;
   transactions: DailySpendingTransaction[];
 }
 
-interface Budget {
+export interface Budget {
   category: string;
   budget: number;
   spent: number;
 }
 
-interface Notification {
+export interface Notification {
   id: number;
   message: string;
 }
 
-interface MockData {
+export interface MockData {
   user: User;
   financials: Financials;
   transactions: Transaction[];
